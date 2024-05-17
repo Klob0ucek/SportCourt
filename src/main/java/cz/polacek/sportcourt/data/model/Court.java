@@ -14,6 +14,8 @@ public class Court {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int size;
+
     @ManyToOne
     private Surface surface;
 }

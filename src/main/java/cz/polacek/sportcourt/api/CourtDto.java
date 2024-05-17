@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CourtDto {
-    private String id;
+    private Long id;
     private SurfaceDto surface;
 }
