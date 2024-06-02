@@ -13,6 +13,13 @@ public class Surface {
     @Id
     @Enumerated(EnumType.STRING)
     private SurfaceType type;
-
     private double price;
+
+    public Surface(SurfaceType type, double price) {
+        this.type = type;
+        this.price = price;
+    }
+
+    public Surface() {
+    }
 }

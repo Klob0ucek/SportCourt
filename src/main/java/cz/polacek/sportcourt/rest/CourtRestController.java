@@ -55,7 +55,7 @@ public class CourtRestController {
         }
 
         @PostMapping
-        public CourtDto makeNewCourt(@RequestParam RequestCourtDto newCourt) {
+        public CourtDto makeNewCourt(@ParameterObject RequestCourtDto newCourt) {
                 return courtFacade.makeNewCourt(newCourt);
         }
 
