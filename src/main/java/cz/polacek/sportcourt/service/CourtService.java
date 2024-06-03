@@ -35,9 +35,16 @@ public class CourtService {
     }
 
     public Court updateCourt(Long id, Court court){
-        Court old = getCourtById(id);
-        System.out.println("Updating" + old + " to " + court);
-        return old;
+        var toUpdate = courtRepository.findById(id);
+        if (toUpdate.isEmpty()){
+            throw new EntityNotFoundException("Did not find court with id: " + id);
+        }
+        var oldCourt = toUpdate.get();
+
+        oldCourt.setSize(court.getSize());
+        oldCourt.setSurface(court.getSurface());
+
+        return courtRepository.save(oldCourt);
     }
 
     public void deleteCourt(Long id){
