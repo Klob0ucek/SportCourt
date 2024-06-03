@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring")
 public interface CourtMapper {
-
     CourtDto mapToCourtDto(Court court);
 
     default Page<CourtDto> mapToCourtDtoPage(Page<Court> courtPage) {

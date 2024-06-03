@@ -1,7 +1,9 @@
 package cz.polacek.sportcourt.service;
 
 import cz.polacek.sportcourt.data.model.Surface;
+import cz.polacek.sportcourt.data.model.SurfaceType;
 import cz.polacek.sportcourt.data.repository.SurfaceRepository;
+import cz.polacek.sportcourt.exceptions.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +24,13 @@ public class SurfaceService {
 
     public Surface updateSurface(Surface surface) {
         return surfaceRepository.save(surface);
+    }
+
+    public Surface getSurfaceByType(SurfaceType type){
+        var surface = surfaceRepository.findById(type);
+        if (surface.isPresent()) {
+            return surface.get();
+        }
+        throw new EntityNotFoundException("Did not find surface with type: " + type);
     }
 }
