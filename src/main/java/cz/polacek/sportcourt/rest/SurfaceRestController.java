@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
                         """
         )
 )
-@Tag(name = "Court", description = "service for court management")
+@Tag(name = "Surface", description = "service for surface management")
 @RequestMapping(path = "/api/surface", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SurfaceRestController {
 

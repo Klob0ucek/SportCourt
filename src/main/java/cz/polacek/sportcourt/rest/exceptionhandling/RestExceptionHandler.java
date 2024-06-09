@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.util.UrlPathHelper;
 
 @RestControllerAdvice
-public class CustomRestGlobalExceptionHandling {
+public class RestExceptionHandler {
     private static final UrlPathHelper URL_PATH_HELPER = new UrlPathHelper();
 
     @ExceptionHandler({AbstractApiException.class})
