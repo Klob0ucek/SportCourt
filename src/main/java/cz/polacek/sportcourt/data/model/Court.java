@@ -6,11 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.List;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "court")
 public class Court {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

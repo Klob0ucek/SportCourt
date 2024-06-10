@@ -5,10 +5,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Id;
 
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "surface")
+
 public class Surface {
     @Id
     @Enumerated(EnumType.STRING)

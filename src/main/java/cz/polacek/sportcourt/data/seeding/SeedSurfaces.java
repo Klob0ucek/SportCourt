@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SeedSurfaces {
     @Bean
-    CommandLineRunner initDatabase(SurfaceRepository repository) {
+    CommandLineRunner initSurfaces(SurfaceRepository repository) {
         return args -> {
             if (!repository.findAll().isEmpty()) {
                 return;
@@ -24,17 +24,3 @@ public class SeedSurfaces {
         };
     }
 }
-
-//class LoadDatabase {
-//
-//    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
-//
-//    @Bean
-//    CommandLineRunner initDatabase(EmployeeRepository repository) {
-//
-//        return args -> {
-//            log.info("Preloading " + repository.save(new Employee("Bilbo Baggins", "burglar")));
-//            log.info("Preloading " + repository.save(new Employee("Frodo Baggins", "thief")));
-//        };
-//    }
-//}

@@ -8,11 +8,16 @@ import cz.polacek.sportcourt.facade.ReservationFacade;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,7 +39,28 @@ public class ReservationRestController {
         this.reservationFacade = reservationFacade;
     }
     @PostMapping
-    public ReservationDto makeNewCourt(@ParameterObject RequestReservationDto newReservation) {
+    public ReservationDto makeNewReservation(@ParameterObject RequestReservationDto newReservation) {
         return reservationFacade.makeNewReservation(newReservation);
     }
+
+    @GetMapping
+    public List<ReservationDto> getAllReservations() {
+        return reservationFacade.getAllReservations();
+    }
+
+    @GetMapping("/{id}")
+    public ReservationDto getReservationById(@PathVariable Long id) {
+        return reservationFacade.getReservationById(id);
+    }
+
+    @DeleteMapping
+    public void deleteReservation(@RequestParam Long reservationId) {
+        reservationFacade.deleteReservation(reservationId);
+    }
+
+    @PostMapping("/{id}")
+    public ReservationDto updateReservation(@PathVariable Long id, @ParameterObject RequestReservationDto update) {
+        return reservationFacade.updateReservation(id, update);
+    }
+
 }
