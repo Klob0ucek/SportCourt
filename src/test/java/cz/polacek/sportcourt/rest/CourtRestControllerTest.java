@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatusCode;
 
+import static org.assertj.core.api.AssertionsForClassTypes.fail;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,6 +69,7 @@ public class CourtRestControllerTest {
 
         try {
             courtRestController.getCourt(1L);
+            fail("Exception should be thrown");
         } catch (EntityNotFoundException e) {
             assertThat(e.getMessage()).isEqualTo("Court with id 1 not found");
         }
@@ -104,6 +106,7 @@ public class CourtRestControllerTest {
 
         try {
             courtRestController.updateCourt(1L, updatedCourt);
+            fail("Exception should be thrown");
         } catch (EntityNotFoundException e) {
             assertThat(e.getMessage()).isEqualTo("Court with id 1 not found");
         }

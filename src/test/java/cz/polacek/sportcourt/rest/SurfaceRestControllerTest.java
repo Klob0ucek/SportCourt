@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatusCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.fail;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,6 +62,7 @@ public class SurfaceRestControllerTest {
 
         try {
             surfaceRestController.updateSurface(expectedSurface);
+            fail("Exception should be thrown");
         } catch (EntityNotFoundException e) {
             assertThat(e.getMessage()).isEqualTo("Surface not found");
         }

@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatusCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.fail;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -63,6 +64,7 @@ public class ReservationRestControllerTest {
 
         try {
             reservationRestController.updateReservation(5L, requestReservation);
+            fail("Exception should be thrown");
         } catch (EntityNotFoundException e) {
             assertThat(e.getMessage()).isEqualTo("Reservation not found");
         }
@@ -85,6 +87,7 @@ public class ReservationRestControllerTest {
 
         try {
             reservationRestController.getReservationById(1L);
+            fail("Exception should be thrown");
         } catch (EntityNotFoundException e) {
             assertThat(e.getMessage()).isEqualTo("Reservation with id 1 not found");
         }
@@ -109,6 +112,7 @@ public class ReservationRestControllerTest {
 
         try {
             reservationRestController.makeNewReservation(newReservation);
+            fail("Exception should be thrown");
         } catch (InvalidReservationTimeException e) {
             assertThat(e.getMessage()).isEqualTo("Time conflict");
         }
