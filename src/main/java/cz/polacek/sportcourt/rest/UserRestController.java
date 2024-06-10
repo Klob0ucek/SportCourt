@@ -3,6 +3,7 @@ package cz.polacek.sportcourt.rest;
 import cz.polacek.sportcourt.api.UserDto;
 import cz.polacek.sportcourt.facade.UserFacade;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -32,6 +33,7 @@ public class UserRestController {
         this.userFacade = userFacade;
     }
 
+    @Operation(summary = "Get all users", description = "Get all users.")
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userFacade.getAllUsers());

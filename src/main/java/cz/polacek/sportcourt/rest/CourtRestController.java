@@ -5,6 +5,7 @@ import cz.polacek.sportcourt.api.ReservationDto;
 import cz.polacek.sportcourt.api.request.RequestCourtDto;
 import cz.polacek.sportcourt.facade.CourtFacade;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.api.annotations.ParameterObject;
@@ -46,26 +47,31 @@ public class CourtRestController {
                 this.courtFacade = courtFacade;
         }
 
+        @Operation(summary = "Get all courts", description = "Get all courts with pagination.")
         @GetMapping
         public ResponseEntity<Page<CourtDto>> getAllCourts(@ParameterObject Pageable pageable) {
                 return ResponseEntity.ok(courtFacade.getAllCourts(pageable));
         }
 
+        @Operation(summary = "Get court by id", description = "Get a single court by id.")
         @GetMapping("/{id}")
         public ResponseEntity<CourtDto> getCourt(@PathVariable Long id) {
                 return ResponseEntity.ok(courtFacade.getCourt(id));
         }
 
+        @Operation(summary = "Create new court", description = "Create new court with data provided by request body.")
         @PostMapping
         public ResponseEntity<CourtDto> makeNewCourt(@RequestBody RequestCourtDto newCourt) {
                 return ResponseEntity.ok(courtFacade.makeNewCourt(newCourt));
         }
 
+        @Operation(summary = "Update court", description = "Update court with ned data provided by request body.")
         @PutMapping("/{id}")
         public ResponseEntity<CourtDto> updateCourt(@PathVariable Long id, @RequestBody RequestCourtDto updatedCourt) {
                 return ResponseEntity.ok(courtFacade.updateCourt(id, updatedCourt));
         }
 
+        @Operation(summary = "Delete court", description = "Delete court by id.")
         @DeleteMapping("/{id}")
         public void deleteCourt(@PathVariable Long id) {
                 courtFacade.deleteCourt(id);

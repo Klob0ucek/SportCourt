@@ -6,6 +6,7 @@ import cz.polacek.sportcourt.api.request.RequestCourtDto;
 import cz.polacek.sportcourt.api.request.RequestReservationDto;
 import cz.polacek.sportcourt.facade.ReservationFacade;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -29,6 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
                 description = """
                         Simple service for reservation management. The API has operations for:
                         - creating reservation
+                        - getting all reservations
+                        - getting reservation by id
+                        - updating reservation
+                        - deleting reservation
                         """
         )
 )
@@ -41,26 +46,32 @@ public class ReservationRestController {
     public ReservationRestController(ReservationFacade reservationFacade) {
         this.reservationFacade = reservationFacade;
     }
+
+    @Operation(summary = "Make new reservation", description = "Make new reservation with data provided by request body.")
     @PostMapping
     public ResponseEntity<ReservationDto> makeNewReservation(@RequestBody RequestReservationDto newReservation) {
         return ResponseEntity.ok(reservationFacade.makeNewReservation(newReservation));
     }
 
+    @Operation(summary = "Get all reservations", description = "Get list of all reservations.")
     @GetMapping
     public ResponseEntity<List<ReservationDto>> getAllReservations() {
         return ResponseEntity.ok(reservationFacade.getAllReservations());
     }
 
+    @Operation(summary = "Get reservation by id", description = "Get a single reservation by id.")
     @GetMapping("/{id}")
     public ResponseEntity<ReservationDto> getReservationById(@PathVariable Long id) {
         return ResponseEntity.ok(reservationFacade.getReservationById(id));
     }
 
+    @Operation(summary = "Delete reservation", description = "Delete reservation by id.")
     @DeleteMapping
     public void deleteReservation(@RequestParam Long reservationId) {
         reservationFacade.deleteReservation(reservationId);
     }
 
+    @Operation(summary = "Update reservation", description = "Update reservation by id with data provided by request body.")
     @PutMapping("/{id}")
     public ResponseEntity<ReservationDto> updateReservation(@PathVariable Long id, @RequestBody RequestReservationDto update) {
         return ResponseEntity.ok(reservationFacade.updateReservation(id, update));

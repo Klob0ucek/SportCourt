@@ -5,6 +5,7 @@ import cz.polacek.sportcourt.api.SurfaceDto;
 import cz.polacek.sportcourt.facade.CourtFacade;
 import cz.polacek.sportcourt.facade.SurfaceFacade;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
                 description = """
                         Simple service for surface management. The API has operations for:
                         - getting all surface types
+                        - updating surface price
                         """
         )
 )
@@ -40,11 +42,13 @@ public class SurfaceRestController {
                 this.surfaceFacade = surfaceFacade;
         }
 
+        @Operation(summary = "Get all surface types", description = "Get all surface types.")
         @GetMapping
         public ResponseEntity<List<SurfaceDto>> getAllSurfaces() {
                 return ResponseEntity.ok(surfaceFacade.getAllSurfaces());
         }
 
+        @Operation(summary = "Update surface price", description = "Update surface price by the surface type.")
         @PatchMapping
         public ResponseEntity<SurfaceDto> updateSurface(@RequestBody SurfaceDto surfaceDto) {
                 return ResponseEntity.ok(surfaceFacade.updateSurface(surfaceDto));
