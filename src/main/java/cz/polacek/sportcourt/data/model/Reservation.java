@@ -1,6 +1,9 @@
 package cz.polacek.sportcourt.data.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +21,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @Entity
-@Table(name = "reservation")
+@Table(name = "`reservation`")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +35,19 @@ public class Reservation {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "game_type", nullable = false)
     private GameType gameType;
 
+    @Column(name = "price", nullable = false)
     private double price;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
+
+    @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
 }

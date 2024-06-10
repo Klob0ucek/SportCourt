@@ -2,7 +2,8 @@
 
 ## Description
 
-This is a Springboot backend application that provides a REST API for managing sport courts.
+This is a Springboot backend application that provides a REST API for managing tennis club's
+courts and reservations.
 
 ## Setup
 
@@ -12,11 +13,11 @@ To start this application you just need to run the following command:
 mvn spring-boot:run
 ```
 
-Optionally you can run this command to start the application with seeded data:
-
-```
-mvn spring-boot:run -Dspring-boot.run.arguments=--app.seedData=true
-```
+The seeding will be done automatically when the application starts. If you want to turn off the seeding you can change:
+`
+spring.jpa.defer-datasource-initialization=false
+`
+in application.properties.
 
 ## API Documentation
 

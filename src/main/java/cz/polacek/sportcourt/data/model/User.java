@@ -19,7 +19,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(unique=true)
+    @Column(name = "phone_number", unique = true)
     private Long phoneNumber;
+
+    @Column(name = "name", nullable = false)
     private String name;
 }
