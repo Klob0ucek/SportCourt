@@ -41,7 +41,7 @@ public class SurfaceRestController {
         }
 
         @GetMapping
-        public ResponseEntity<List<SurfaceDto>> getAllCourts() {
+        public ResponseEntity<List<SurfaceDto>> getAllSurfaces() {
                 return ResponseEntity.ok(surfaceFacade.getAllSurfaces());
         }
 
