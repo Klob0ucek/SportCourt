@@ -101,7 +101,7 @@ public class TestDataFactory {
 
     public static User getUser() {
         User user = new User();
-        user.setId(1L);
+        user.setId(0L);
         user.setName("John Doe");
         user.setPhoneNumber(727838919L);
         return user;
