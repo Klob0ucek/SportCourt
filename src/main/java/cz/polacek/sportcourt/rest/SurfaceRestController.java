@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,12 +41,12 @@ public class SurfaceRestController {
         }
 
         @GetMapping
-        public List<SurfaceDto> getAllCourts() {
-                return surfaceFacade.getAllSurfaces();
+        public ResponseEntity<List<SurfaceDto>> getAllCourts() {
+                return ResponseEntity.ok(surfaceFacade.getAllSurfaces());
         }
 
         @PatchMapping
-        public SurfaceDto updateSurface(@RequestBody SurfaceDto surfaceDto) {
-                return surfaceFacade.updateSurface(surfaceDto);
+        public ResponseEntity<SurfaceDto> updateSurface(@RequestBody SurfaceDto surfaceDto) {
+                return ResponseEntity.ok(surfaceFacade.updateSurface(surfaceDto));
         }
 }

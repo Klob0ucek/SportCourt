@@ -11,6 +11,7 @@ import cz.polacek.sportcourt.exceptions.InvalidReservationTimeException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,8 +52,6 @@ public class ReservationService {
         newReservation.setEndTime(reservation.getEndTime());
         newReservation.setPrice(getPrice(newReservation));
 
-        System.out.println(reservation);
-
         return reservationRepository.save(newReservation);
     }
 
@@ -77,16 +76,28 @@ public class ReservationService {
     }
 
     public Reservation updateReservation(Long id, RequestReservationDto reservation) {
-        if (!findOverlappingReservations(reservation.getCourtId(), reservation.getStartTime(), reservation.getEndTime()).isEmpty()) {
+
+        var existing = findOverlappingReservations(reservation.getCourtId(), reservation.getStartTime(), reservation.getEndTime());
+        if (!existing.isEmpty() && existing.stream().anyMatch(r -> !Objects.equals(r.getId(), id))){
             throw new InvalidReservationTimeException("Reservation already exists for this time.");
         }
         if (reservation.getStartTime().isAfter(reservation.getEndTime())) {
             throw new InvalidReservationTimeException("Start time is after end time.");
         }
 
-        //TODO
+        var court = courtService.getCourtById(reservation.getCourtId());
+        var user = userService.findOrCreate(reservation.getPhoneNumber(), reservation.getName());
 
-        return null;
+        var newReservation = new Reservation();
+        newReservation.setId(id);
+        newReservation.setCourt(court);
+        newReservation.setUser(user);
+        newReservation.setGameType(reservation.getGameType());
+        newReservation.setStartTime(reservation.getStartTime());
+        newReservation.setEndTime(reservation.getEndTime());
+        newReservation.setPrice(getPrice(newReservation));
+
+        return reservationRepository.save(newReservation);
     }
 
     private double getPrice(Reservation reservation) {

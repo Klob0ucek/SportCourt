@@ -1,6 +1,7 @@
 package cz.polacek.sportcourt.rest;
 
 import cz.polacek.sportcourt.api.CourtDto;
+import cz.polacek.sportcourt.api.ReservationDto;
 import cz.polacek.sportcourt.api.request.RequestCourtDto;
 import cz.polacek.sportcourt.facade.CourtFacade;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,23 +47,23 @@ public class CourtRestController {
         }
 
         @GetMapping
-        public Page<CourtDto> getAllCourts(@ParameterObject Pageable pageable) {
-                return courtFacade.getAllCourts(pageable);
+        public ResponseEntity<Page<CourtDto>> getAllCourts(@ParameterObject Pageable pageable) {
+                return ResponseEntity.ok(courtFacade.getAllCourts(pageable));
         }
 
         @GetMapping("/{id}")
-        public CourtDto getCourt(@PathVariable Long id) {
-                return courtFacade.getCourt(id);
+        public ResponseEntity<CourtDto> getCourt(@PathVariable Long id) {
+                return ResponseEntity.ok(courtFacade.getCourt(id));
         }
 
         @PostMapping
-        public CourtDto makeNewCourt(@ParameterObject RequestCourtDto newCourt) {
-                return courtFacade.makeNewCourt(newCourt);
+        public ResponseEntity<CourtDto> makeNewCourt(@RequestBody RequestCourtDto newCourt) {
+                return ResponseEntity.ok(courtFacade.makeNewCourt(newCourt));
         }
 
         @PutMapping("/{id}")
-        public CourtDto updateCourt(@PathVariable Long id, @RequestBody RequestCourtDto updatedCourt) {
-                return courtFacade.updateCourt(id, updatedCourt);
+        public ResponseEntity<CourtDto> updateCourt(@PathVariable Long id, @RequestBody RequestCourtDto updatedCourt) {
+                return ResponseEntity.ok(courtFacade.updateCourt(id, updatedCourt));
         }
 
         @DeleteMapping("/{id}")

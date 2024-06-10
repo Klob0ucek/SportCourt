@@ -12,10 +12,13 @@ import java.util.List;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,18 +42,18 @@ public class ReservationRestController {
         this.reservationFacade = reservationFacade;
     }
     @PostMapping
-    public ReservationDto makeNewReservation(@ParameterObject RequestReservationDto newReservation) {
-        return reservationFacade.makeNewReservation(newReservation);
+    public ResponseEntity<ReservationDto> makeNewReservation(@RequestBody RequestReservationDto newReservation) {
+        return ResponseEntity.ok(reservationFacade.makeNewReservation(newReservation));
     }
 
     @GetMapping
-    public List<ReservationDto> getAllReservations() {
-        return reservationFacade.getAllReservations();
+    public ResponseEntity<List<ReservationDto>> getAllReservations() {
+        return ResponseEntity.ok(reservationFacade.getAllReservations());
     }
 
     @GetMapping("/{id}")
-    public ReservationDto getReservationById(@PathVariable Long id) {
-        return reservationFacade.getReservationById(id);
+    public ResponseEntity<ReservationDto> getReservationById(@PathVariable Long id) {
+        return ResponseEntity.ok(reservationFacade.getReservationById(id));
     }
 
     @DeleteMapping
@@ -58,9 +61,8 @@ public class ReservationRestController {
         reservationFacade.deleteReservation(reservationId);
     }
 
-    @PostMapping("/{id}")
-    public ReservationDto updateReservation(@PathVariable Long id, @ParameterObject RequestReservationDto update) {
-        return reservationFacade.updateReservation(id, update);
+    @PutMapping("/{id}")
+    public ResponseEntity<ReservationDto> updateReservation(@PathVariable Long id, @RequestBody RequestReservationDto update) {
+        return ResponseEntity.ok(reservationFacade.updateReservation(id, update));
     }
-
 }
