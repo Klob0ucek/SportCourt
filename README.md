@@ -19,6 +19,14 @@ spring.jpa.defer-datasource-initialization=false
 `
 in application.properties.
 
+## Testing
+
+To run the tests you can use the following command:
+
+```
+mvn clean test
+```
+
 ## API Documentation
 
 The API documentation is available at the following URL:
